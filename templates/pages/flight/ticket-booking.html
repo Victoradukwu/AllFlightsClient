@@ -10,7 +10,7 @@
   <div class="top-bar"></div>
   <nav class = "navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Allflights</a>
+      <a class="navbar-brand" href="../index.html">Allflights</a>
                 <!-- Links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -37,20 +37,20 @@
              <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#contact">Contact & Seat</a>
+            <a class="nav-link active" data-bs-toggle="tab" href="#contact" id="contact_tab">Contact & Seat</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#menu1">Passenger</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#passenger" id="passenger_tab">Passenger</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#menu2">Payment</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#payment" id="payment_tab">Payment</a>
           </li>
         </ul>
               <!-- Tab panes -->
         <div class="tab-content">
           <div id="contact" class="container tab-pane active"><br>
             <h3>Contact & Seat Information</h3>
-            <form>
+            <form id="contact_form">
              <div class="row">
                <div class="col-md-6">
                  <label for="first_name">First Name:</label>
@@ -65,25 +65,29 @@
              </div>
               <div class="row">
                <div class="col-md-6">
-                 <label for="email">First Name:</label>
+                 <label for="email">Email:</label>
                  <input name="email" id="email" class="form-control form-control-sm" type="text" placeholder="abc@xyz.com">
                  <span class="invalid-feedback"> Email is required. </span>
                </div>
                <div class="col-md-6">
                  <label for="phone">Phone Number:</label>
-                 <input name="phone" id="phone" class="form-control form-control-sm" type="text" placeholder="Adukwu">
+                 <input name="phone" id="phone" class="form-control form-control-sm" type="text" placeholder="08012345678">
                  <span class="invalid-feedback">Phone Number is required. </span>
                </div>
              </div>
 
              <div class="row mt-2">
-                 <div class="col-md-6">
+                 <div class="col-md-3">
                    <label for="status">Flight Class:</label>
                    <select id="class" class="form-control">
                      <option value="Economy">Economy</option>
                      <option value="Premium">Premium</option>
                      <option value="Business">Business</option>
                    </select>
+                 </div>
+                 <div class="col-md-3">
+                   <label for="status">Flight Fare:</label>
+                   NGN50000.00
                  </div>
                  <div class="col-md-6">
                    <label for="status">Number of Seats:</label>
@@ -100,18 +104,168 @@
                          Total: NGN100,000.00
                      </div>
                      <div class="form-group col-md-6">
-                         <button class="btn float-end"  type="button">Next</button>
+                         <button class="btn float-end" type="button" onclick="document.getElementById('passenger_tab').click();">Continue</button>
                      </div>
                  </div>
             </form>
           </div>
-          <div id="menu1" class="container tab-pane fade"><br>
+          <div id="passenger" class="container tab-pane fade"><br>
             <h3>Passenger(s) Details</h3>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <form id="passenger_form">
+              </br></br>
+              <fieldset>
+                <legend>Passenger 1</legend>
+            <div class="row">
+                 <div class="col-md-6">
+                   <label for="first_name1">First Name:</label>
+                   <input name="first_name1" id="first_name1" class="form-control form-control-sm" type="text" placeholder="Victor">
+                   <span class="invalid-feedback"> First name is required. </span>
+                 </div>
+                 <div class="col-md-6">
+                   <label for="last_name1">Last Name:</label>
+                   <input name="last_name1" id="last_name1" class="form-control form-control-sm" type="text" placeholder="Adukwu">
+                   <span class="invalid-feedback"> Last name is required. </span>
+                 </div>
+                </div>
+             <div class="row mt-2">
+                 <div class="col-md-6">
+                   <label for="gender">Gender:</label>
+                   <select id="gender1" class="form-control">
+                     <option value="Male" selected>Male</option>
+                     <option value="Female">Female</option>
+                   </select>
+                 </div>
+                 <div class="col-md-6">
+                   <label for="dob">Date of Birth:</label>
+                 <input name="dob" id="dob1" class="form-control form-control-sm" type="date">
+                 <span class="invalid-feedback"> Date of Birth is required. </span>
+                 </div>
+               </div>
+              </fieldset>
+              </br></br>
+              <fieldset>
+                <legend>Passenger 2</legend>
+            <div class="row">
+                 <div class="col-md-6">
+                   <label for="first_name2">First Name:</label>
+                   <input name="first_name2" id="first_name2" class="form-control form-control-sm" type="text" placeholder="Dave">
+                   <span class="invalid-feedback"> First name is required. </span>
+                 </div>
+                 <div class="col-md-6">
+                   <label for="last_name2">Last Name:</label>
+                   <input name="last_name2" id="last_name2" class="form-control form-control-sm" type="text" placeholder="Duke">
+                   <span class="invalid-feedback"> Last name is required. </span>
+                 </div>
+                </div>
+             <div class="row mt-2">
+                 <div class="col-md-6">
+                   <label for="gender2">Gender:</label>
+                   <select id="gender2" class="form-control">
+                     <option value="Male" selected>Male</option>
+                     <option value="Female">Female</option>
+                   </select>
+                 </div>
+                 <div class="col-md-6">
+                   <label for="dob2">Date of Birth:</label>
+                 <input name="dob2" id="dob2" class="form-control form-control-sm" type="date">
+                 <span class="invalid-feedback"> Date of Birth is required. </span>
+                 </div>
+               </div>
+              </fieldset>
+                  <div class="row mt-2">
+                     <div class="form-group col-md-6">
+                         <button class="btn float-start" type="button" onclick="document.getElementById('contact_tab').click();">Go Back</button>
+                     </div>
+                     <div class="form-group col-md-6">
+                         <button class="btn float-end" type="button" onclick="document.getElementById('payment_tab').click();">Continue</button>
+                     </div>
+                 </div>
+            </form>
           </div>
-          <div id="menu2" class="container tab-pane fade"><br>
+          <div id="payment" class="container tab-pane fade pb-5"><br>
             <h3>Payment Details</h3>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+            <div class="card shadow-lg mx-auto">
+              <div class="card-header text-center">
+                <h4>Book a flight</h4>
+                <small>Pay: NGN100,000.00</small>
+              </div>
+              <div class="card-body container">
+                <form id="payment_form">
+                  <fieldset id="payment_fieldset">
+                  <div class="form-group">
+                    <label for="card_name">Name on the card: </label>
+                    <input class="form-control form-control-sm" formcontrolname="card_name" id="card_name" name="card_name" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="card_number">Card Number: </label>
+                    <input class="form-control form-control-sm" id="card_number", name="card_number" type="text">
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="card_cvv">Card Cvv: </label>
+                      <input id="card_cvv" class="form-control form-control-sm" type="text">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="card_pin">Card PIN: </label>
+                      <input id="card_pin" class="form-control form-control-sm" type="number">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Card Expiry: </label>
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <select class="form-control">
+                          <option value="Expiry Month">Expiry Month</option>
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                          <option value="03">03</option>
+                          <option value="04">04</option>
+                          <option value="05">05</option>
+                          <option value="06">06</option>
+                          <option value="07">07</option>
+                          <option value="08">08</option>
+                          <option value="09">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <select class="form-control">
+                          <option value="Expiry Year">Expiry Year</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                          <option value="2024">2024</option>
+                          <option value="2025">2025</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-check form-group">
+                    <input class="form-check-input" type="checkbox" id="save_card" name="save_card">
+                    <label class="form-check-label">Save Card</label>
+                  </div>
+                    </fieldset>
+                  <div class="form-check form-group">
+                    <input class="form-check-input" type="checkbox" id="use_saved_card" name="save_card" onclick="showSavedCards()">
+                    <label class="form-check-label"> Use Save Card</label>
+                  </div>
+                  <div id="saved_card_select" class="form-group" style="display: none;">
+                    <select class="form-control">
+                          <option value="1234">MasterCard ending with 1234</option>
+                          <option value="2345">Visa Card ending with 2345</option>
+                        </select>
+                  </div>
+                  <div>
+                    <button class="btn float-start" type="submit">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+           <div class="form-group mb-5">
+               <button class="btn float-start" type="button" onclick="document.getElementById('passenger_tab').click();">Go Back</button>
+           </div>
+
           </div>
         </div>
       </div>
@@ -121,5 +275,19 @@
       &copy Autoticket <script>document.write(new Date().getFullYear().toString())</script>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+      const showSavedCards = () => {
+          const x = document.getElementById("use_saved_card")
+          const elt = document.getElementById("payment_fieldset")
+          if (x.checked == true) {
+              document.getElementById("saved_card_select").style.display = "block"
+              elt.style.display = "none"
+          }
+          else{
+              document.getElementById("saved_card_select").style.display = "none"
+              elt.style.display = "block"
+          }
+            }
+  </script>
 </body>
 </html>
