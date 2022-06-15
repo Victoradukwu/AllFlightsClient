@@ -1,0 +1,4 @@
+export const actionTypes = {
+  LIST_FLIGHTS_SUCCESS: "LIST_FLIGHTS_SUCCESS",
+  PAGE_COUNT_UPDATE: "PAGE_COUNT_UPDATE",
+};
