@@ -4,9 +4,12 @@ import initialState from "./initialState";
 const flightReducer = (state = initialState.flights, action) => {
   switch (action.type) {
     case actionTypes.LIST_FLIGHTS_SUCCESS:
-      return action.flights;
-    case actionTypes.PAGE_COUNT_UPDATE:
-      return { ...state, ...action.pageCount };
+      return {
+        ...state,
+        flights: action.flights,
+        pageCount: action.pageCount,
+        count: action.count,
+      };
     default:
       return state;
   }

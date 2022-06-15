@@ -4,12 +4,11 @@ import * as flightActions from "../../redux/actions/flightActions";
 import PropTypes from "prop-types";
 import FlightsList from "./FlightsList";
 import { toast } from "react-toastify";
-// import { Watch } from "react-loader-spinner";
 import Loader from "rsuite/Loader";
 
-const FlightsPage = ({ flights, listFlights }) => {
+const FlightsPage = ({ flight, listFlights }) => {
   useEffect(() => {
-    if (flights.length === 0) {
+    if (!("flights" in flight)) {
       listFlights()
         .then(() => toast.success("Flights fetched"))
         .catch((error) => {
@@ -20,7 +19,7 @@ const FlightsPage = ({ flights, listFlights }) => {
 
   return (
     <>
-      {flights.length === 0 ? (
+      {!("flights" in flight) ? (
         <Loader
           content="Loading"
           size="lg"
@@ -30,20 +29,20 @@ const FlightsPage = ({ flights, listFlights }) => {
           style={{ color: "#660033" }}
         />
       ) : (
-        <FlightsList flights={flights} />
+        <FlightsList flights={flight.flights} />
       )}
     </>
   );
 };
 
 FlightsPage.propTypes = {
-  flights: PropTypes.array.isRequired,
+  flight: PropTypes.object.isRequired,
   listFlights: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    flights: state.flights.length === 0 ? [] : state.flights,
+    flight: state.flight,
   };
 }
 

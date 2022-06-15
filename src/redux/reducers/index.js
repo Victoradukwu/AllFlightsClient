@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import flights from "./flightReducer";
+import flightReducer from "./flightReducer";
 
-const rootReducer = combineReducers({ flights: flights });
+const rootReducer = combineReducers({ flight: flightReducer });
 
 export default rootReducer;
