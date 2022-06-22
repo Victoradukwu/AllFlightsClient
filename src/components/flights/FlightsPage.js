@@ -10,12 +10,22 @@ const FlightsPage = ({ flight, listFlights }) => {
   useEffect(() => {
     if (!("flights" in flight)) {
       listFlights()
-        .then(() => toast.success("Flights fetched"))
+        // .then(() => toast.success("Flights fetched"))
         .catch((error) => {
           alert("Loading flights failed" + error);
         });
     }
+    document.addEventListener("flightsNewPage", fetchNewFlightsPage);
   }, []);
+
+  const fetchNewFlightsPage = (event) => {
+    const nextPage = event.detail.page;
+    listFlights(nextPage)
+      .then(() => toast.success("Flights fetched"))
+      .catch((error) => {
+        alert("Loading flights failed" + error);
+      });
+  };
 
   return (
     <>
@@ -29,7 +39,11 @@ const FlightsPage = ({ flight, listFlights }) => {
           style={{ color: "#660033" }}
         />
       ) : (
-        <FlightsList flights={flight.flights} />
+        <FlightsList
+          flights={flight.flights}
+          count={flight.count}
+          pageCount={flight.pageCount}
+        />
       )}
     </>
   );

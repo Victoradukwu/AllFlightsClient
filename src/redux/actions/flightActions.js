@@ -19,10 +19,10 @@ export const pageCountUpdate = (pageCount) => {
 };
 
 //Thunks
-export const listFlights = () => {
+export const listFlights = (page = 1) => {
   return (dispatch) => {
     return flightsServices
-      .listFlights()
+      .listFlights(page)
       .then((resp) => {
         dispatch(
           listFlightsSuccess(resp.results, resp.numberOfPages, resp.count)
