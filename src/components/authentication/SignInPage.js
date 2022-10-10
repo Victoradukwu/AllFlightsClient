@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 import * as authActions from "../../redux/actions/authActions";
 import PropTypes from "prop-types";
@@ -7,15 +7,22 @@ import { toast } from "react-toastify";
 import {useNavigate} from 'react-router-dom';
 // import Loader from "rsuite/Loader";
 
-const SignInPage = ({logIn}) => {
+const SignInPage = ({logIn, auth}) => {
   const navigate = useNavigate();
-  useEffect(() => {
-    document.addEventListener("formSubmit", userLogIn);
-  }, []);
 
-  const userLogIn = (event) => {
-    const data = event.detail.data;
-    logIn(data)
+  const [user, setUser] = useState({});
+
+
+  const setToken = () =>{
+    const token = auth.user?auth.user.accessToken:''
+    localStorage.setItem('token', token)
+  }
+
+  useEffect(setToken, [auth.user])
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    logIn(user)
       .then(() => {
         toast.success("Successfully signed in");
       })
@@ -24,6 +31,15 @@ const SignInPage = ({logIn}) => {
         toast.error("Login failed. " + error);
       });
   };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value
+    }));
+  };
+
   return (
     <main>
       <div className="card shadow-lg mx-auto">
@@ -31,7 +47,7 @@ const SignInPage = ({logIn}) => {
           <h4>Please sign in to continue</h4>
         </div>
         <div className="card-body container">
-          <SignInForm />
+          <SignInForm onChange={handleChange} onSubmit={handleSubmit} user={user}/>
         </div>
         <hr />
         <div style={{ margin: "8px" }}>

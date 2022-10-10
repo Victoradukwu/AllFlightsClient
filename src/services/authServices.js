@@ -1,4 +1,4 @@
-import { handleError } from "./apiUtils";
+import {handleError, handleResponse} from "./apiUtils";
 const baseUrl = `${process.env.API_URL}/auth/`;
 
 export const login = (data) => {
@@ -7,6 +7,6 @@ export const login = (data) => {
     headers: { "content-type": "application/json" },
     body: JSON.stringify(data),
   })
-    .then((resp) => resp.json())
+    .then(handleResponse)
     .catch(handleError);
 };

@@ -1,33 +1,23 @@
-import React, { useState } from "react";
-// import PropTypes from "prop-types";
+import React from "react";
+import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import PasswordInput from "../common/PasswordInput";
 
-const SignInForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const data = { email, password };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const submitEvent = new CustomEvent("formSubmit", {
-      detail: { data: data },
-    });
-    document.dispatchEvent(submitEvent);
-  };
+const SignInForm = ({onChange, onSubmit, user}) => {
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <TextInput
         label={"Email"}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={onChange}
         name={"email"}
-        value={email}
+        value={user.email}
       />
       <PasswordInput
         label={"Password"}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={onChange}
         name={"password"}
+        value={user.password}
       />
 
       <small>
@@ -46,6 +36,12 @@ const SignInForm = () => {
       </div>
     </form>
   );
+};
+
+SignInForm.propTypes = {
+  user: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SignInForm;

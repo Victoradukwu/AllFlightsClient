@@ -1,10 +1,8 @@
 export const handleResponse = async (response) =>{
   if (response.ok) {return response.json();}
-  if (response.status === 400) {
-    const err_msg = await response.text();
-    throw new Error(err_msg);
-  }
-  throw new Error("Network error occurred.");
+
+  const  err_msg = await response.json();
+  throw new Error(err_msg.detail);
 }
 
 // In a real app, would likely call an error logging service.
