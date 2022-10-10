@@ -1,20 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Tooltip, Whisper, Pagination } from "rsuite";
 
-const FlightsList = ({ flights, pageCount, count }) => {
-  const [activePage, setActivePage] = useState(1);
-
-  const dispatchPageFetchEvent = () => {
-    const flightsEvent = new CustomEvent("flightsNewPage", {
-      detail: { page: activePage },
-    });
-    document.dispatchEvent(flightsEvent);
-  };
-
-  useEffect(() => {
-    dispatchPageFetchEvent();
-  }, [activePage]);
+const FlightsList = ({ flights, pageCount, count, onSelect, activePage }) => {
 
   return (
     <main>
@@ -102,7 +90,7 @@ const FlightsList = ({ flights, pageCount, count }) => {
               first
               ellipsis
               maxButtons={7}
-              onSelect={(event) => setActivePage(Number(event))}
+              onSelect={onSelect}
               total={count}
               layout={["pager", "total"]}
             />
@@ -117,6 +105,8 @@ FlightsList.propTypes = {
   flights: PropTypes.array.isRequired,
   count: PropTypes.number.isRequired,
   pageCount: PropTypes.number.isRequired,
+  activePage: PropTypes.number.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default FlightsList;

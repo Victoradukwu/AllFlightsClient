@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 import * as flightActions from "../../redux/actions/flightActions";
 import PropTypes from "prop-types";
@@ -7,25 +7,19 @@ import { toast } from "react-toastify";
 import Loader from "rsuite/Loader";
 
 const FlightsPage = ({ flight, listFlights }) => {
-  useEffect(() => {
-    if (!("flights" in flight)) {
-      listFlights()
-        // .then(() => toast.success("Flights fetched"))
-        .catch((error) => {
-          alert("Loading flights failed" + error);
-        });
-    }
-    document.addEventListener("flightsNewPage", fetchNewFlightsPage);
-  }, []);
 
-  const fetchNewFlightsPage = (event) => {
-    const nextPage = event.detail.page;
-    listFlights(nextPage)
+  const [activePage, setActivePage] = useState(1);
+  const handlePageChange = (event) => setActivePage(Number(event))
+
+  const fetchNewFlightsPage = () => {
+    listFlights(activePage)
       .then(() => toast.success("Flights fetched"))
       .catch((error) => {
-        alert("Loading flights failed" + error);
+        toast.error("Loading flights failed" + error);
       });
   };
+
+  useEffect(fetchNewFlightsPage, [activePage]);
 
   return (
     <>
@@ -43,6 +37,8 @@ const FlightsPage = ({ flight, listFlights }) => {
           flights={flight.flights}
           count={flight.count}
           pageCount={flight.pageCount}
+          activePage={activePage}
+          onSelect={handlePageChange}
         />
       )}
     </>
