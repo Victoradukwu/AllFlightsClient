@@ -8,7 +8,7 @@ const TextInput = ({ name, label, onChange, placeholder, value }) => {
         {label}
         <input
           className="form-control form-control-sm"
-          type="text"
+          type="password"
           name={name}
           id={name}
           placeholder={placeholder}

@@ -9,6 +9,7 @@ const flightReducer = (state = initialState.flights, action) => {
         flights: action.flights,
         pageCount: action.pageCount,
         count: action.count,
+        numberOfPages: action.numberOfPages
       };
     default:
       return state;

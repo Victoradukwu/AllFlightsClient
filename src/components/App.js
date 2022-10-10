@@ -8,6 +8,7 @@ import Footer from "./common/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FlightsPage from "./flights/FlightsPage";
 import "rsuite/dist/rsuite.min.css";
+import SignInPage from "./authentication/SignInPage";
 
 const App = () => (
   <div className="container-fluid me-auto" style={{ width: "100%" }}>
@@ -17,6 +18,7 @@ const App = () => (
       <ReactTooltip />
       <Routes>
         <Route path="/" element={<FlightsPage />} />
+        <Route path="/auth/login" element={<SignInPage />} />
       </Routes>
     </BrowserRouter>
     <Footer />

@@ -11,11 +11,11 @@ const NavBar = () => {
       style={{ width: "100vw" }}
     >
       <Container fluid>
-        <Navbar.Brand href="#home">AllFlights</Navbar.Brand>
+        <Navbar.Brand href="/">AllFlights</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#home">Sign in</Nav.Link>
+            <Nav.Link href="/auth/login" >Sign in</Nav.Link>
             <Nav.Link href="#link">Register</Nav.Link>
             <NavDropdown title="Victor Adukwu" id="user-dropdown">
               <NavDropdown.Item href="#action/3.1">
