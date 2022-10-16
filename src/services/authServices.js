@@ -21,3 +21,17 @@ export const logout = () => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const changePassword = (data) => {
+  return fetch(`${baseUrl}change-password/`, {
+    headers: {
+      "content-type": "application/json",
+      "Authorization": `Token ${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify(data),
+    method: "POST",
+  })
+    .then(handleResponse)
+    .catch(handleError);
+};
+

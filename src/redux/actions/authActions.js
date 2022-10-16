@@ -15,11 +15,12 @@ export const logoutSuccess = () => {
   };
 };
 
-export const logoutError = () => {
+export const passwordChangeSuccess = () => {
   return {
-    type: actionTypes.LOGOUT_SUCCESS
+    type: actionTypes.PW_CHANGE_SUCCESS
   };
 };
+
 
 //Thunks
 export const login = (data) => {
@@ -40,8 +41,21 @@ export const logout = () => {
   return (dispatch) => {
     return authServices
       .logout()
-      .then((resp) => {
-        dispatch(logoutSuccess(resp));
+      .then(() => {
+        dispatch(logoutSuccess());
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
+export const changePassword = (data) => {
+  return (dispatch) => {
+    return authServices
+      .changePassword(data)
+      .then(() => {
+        dispatch(passwordChangeSuccess());
       })
       .catch((error) => {
         throw error;

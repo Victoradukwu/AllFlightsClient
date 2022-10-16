@@ -77,7 +77,7 @@ const NavBar = ({auth, logout}) => {
                 <NavDropdown.Item href="#action/3.2">
                   Update Profile
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
+                <NavDropdown.Item href="/auth/change-pw">
                   Change Password
                 </NavDropdown.Item>
                 <NavDropdown.Divider/>

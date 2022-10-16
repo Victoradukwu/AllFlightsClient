@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FlightsPage from "./flights/FlightsPage";
 import "rsuite/dist/rsuite.min.css";
 import SignInPage from "./authentication/SignInPage";
+import ChangePasswordPage from "./authentication/ChangePasswordPage";
 
 const App = () => (
   <div className="container-fluid me-auto" style={{ width: "100%" }}>
@@ -19,6 +20,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<FlightsPage />} />
         <Route path="/auth/login" element={<SignInPage />} />
+        <Route path="/auth/change-pw" element={<ChangePasswordPage />} />
       </Routes>
     </BrowserRouter>
     <Footer />

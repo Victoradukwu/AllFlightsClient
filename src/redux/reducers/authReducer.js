@@ -13,6 +13,11 @@ const authReducer = (state = initialState.auth, action) => {
         ...state,
         user: null
       };
+    case actionTypes.PW_CHANGE_SUCCESS:
+    return {
+      ...state,
+      user: null
+    };
     default:
       return state;
   }
