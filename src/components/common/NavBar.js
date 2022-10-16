@@ -10,6 +10,12 @@ const NavBar = ({auth}) => {
 
   }
 
+  const adminOnlyVisibility = ()=>{
+    if (auth.user && auth.user.user.roles.includes('admin')){
+      return {display: 'block'}
+    }else {return {display: 'none'}}
+  }
+
   return (
     <Navbar
       bg="dark"
@@ -30,7 +36,7 @@ const NavBar = ({auth}) => {
               </>
               :
               <NavDropdown title={userName()} id="user-dropdown">
-                <NavDropdown.Item href="#action/3.1">
+                <NavDropdown.Item href="#action/3.1" style={adminOnlyVisibility()}>
                   Deactivate User
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
