@@ -9,6 +9,18 @@ export const logInSuccess = (loggedInUser) => {
   };
 };
 
+export const logoutSuccess = () => {
+  return {
+    type: actionTypes.LOGOUT_SUCCESS
+  };
+};
+
+export const logoutError = () => {
+  return {
+    type: actionTypes.LOGOUT_SUCCESS
+  };
+};
+
 //Thunks
 export const login = (data) => {
   return (dispatch) => {
@@ -18,7 +30,20 @@ export const login = (data) => {
         dispatch(logInSuccess(resp));
       })
       .catch((error) => {
-        //TODO dispatch a LOGIN_FAILURE action here
+        //TODO dispatch a LOGIN_ERROR action here
+        throw error;
+      });
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    return authServices
+      .logout()
+      .then((resp) => {
+        dispatch(logoutSuccess(resp));
+      })
+      .catch((error) => {
         throw error;
       });
   };

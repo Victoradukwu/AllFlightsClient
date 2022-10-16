@@ -2,13 +2,48 @@ import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import * as authActions from "../../redux/actions/authActions";
+import {toast} from "react-toastify";
+// import {useNavigate} from "react-router-dom";
 
-const NavBar = ({auth}) => {
+const NavBar = ({auth, logout}) => {
+  // const navigate = useNavigate();
   const userName = ()=>{
     if (auth.user){return auth.user.user.firstName+' '+ auth.user.user.lastName;}
     else {return null;}
 
   }
+
+  const logOut = ()=>{
+    logout()
+      .then(() => {
+        localStorage.removeItem('token');
+        toast.success("Successfully signed out");
+      })
+      // .then(() => navigate('/'))
+      .catch((error) => {
+        toast.error("Login failed. " + error);
+      });
+  }
+
+  const handleLogout = () => {
+    confirmAlert({
+      title: 'Confirm log out',
+      message: 'Are you sure to log out?.',
+      buttons: [
+        {
+          label: 'Yes, log out.',
+          onClick: () => logOut()
+        },
+        {
+          label: 'No, go back'
+        }
+      ]
+    });
+  };
+
 
   const adminOnlyVisibility = ()=>{
     if (auth.user && auth.user.user.roles.includes('admin')){
@@ -36,7 +71,7 @@ const NavBar = ({auth}) => {
               </>
               :
               <NavDropdown title={userName()} id="user-dropdown">
-                <NavDropdown.Item href="#action/3.1" style={adminOnlyVisibility()}>
+                <NavDropdown.Item style={adminOnlyVisibility()}>
                   Deactivate User
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -46,7 +81,7 @@ const NavBar = ({auth}) => {
                   Change Password
                 </NavDropdown.Item>
                 <NavDropdown.Divider/>
-                <NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout} >Log out</NavDropdown.Item>
               </NavDropdown>
             }
           </Nav>
@@ -57,13 +92,18 @@ const NavBar = ({auth}) => {
 };
 
 NavBar.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) =>{
   return {
     auth: state.auth,
   };
 }
 
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = {
+    logout: authActions.logout
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

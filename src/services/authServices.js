@@ -10,3 +10,14 @@ export const login = (data) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const logout = () => {
+  return fetch(`${baseUrl}logout/`, {
+    headers: {
+      "content-type": "application/json",
+      "Authorization": `Token ${localStorage.getItem('token')}`
+    }
+  })
+    .then(handleResponse)
+    .catch(handleError);
+};
