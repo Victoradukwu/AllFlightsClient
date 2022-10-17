@@ -35,3 +35,22 @@ export const changePassword = (data) => {
     .catch(handleError);
 };
 
+export const passwordResetInit = (email) => {
+  return fetch(`${baseUrl}initiate-password-reset/${email}`, {
+    headers: {
+      "content-type": "application/json"
+    }
+  })
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const passwordResetComplete = (data) => {
+  return fetch(`${baseUrl}complete-password-reset/`, {
+    headers: {"content-type": "application/json"},
+    body: JSON.stringify(data),
+    method: "POST",
+  })
+    .then(handleResponse)
+    .catch(handleError);
+};

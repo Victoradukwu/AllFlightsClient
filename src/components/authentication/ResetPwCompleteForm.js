@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
 import PasswordInput from "../common/PasswordInput";
+import TextInput from "../common/TextInput";
 
-const SignInForm = ({onChange, onSubmit, user}) => {
+const ResetPwCompleteForm = ({onChange, onSubmit, data}) => {
 
   return (
     <form onSubmit={onSubmit}>
@@ -11,24 +11,20 @@ const SignInForm = ({onChange, onSubmit, user}) => {
         label={"Email"}
         onChange={onChange}
         name={"email"}
-        value={user.email}
+        value={data.email}
       />
       <PasswordInput
         label={"Password"}
         onChange={onChange}
         name={"password"}
-        value={user.password}
+        value={data.password}
       />
-
-      <small>
-        Did you forget your password?
-        <a href="/auth/initiate-pw-reset">Reset it.</a>
-      </small>
-      <br />
-      <small>
-        Don&apos;t have an account? <a href="./register.html">Register</a> to
-        continue.
-      </small>
+      <PasswordInput
+        label={"Confirm password"}
+        onChange={onChange}
+        name={"confirmPassword"}
+        value={data.confirmPassword}
+      />
       <div>
         <button className="btn float-left" type="submit">
           Submit
@@ -38,10 +34,10 @@ const SignInForm = ({onChange, onSubmit, user}) => {
   );
 };
 
-SignInForm.propTypes = {
-  user: PropTypes.object.isRequired,
+ResetPwCompleteForm.propTypes = {
+  data: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default SignInForm;
+export default ResetPwCompleteForm;
