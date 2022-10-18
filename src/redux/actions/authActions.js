@@ -21,6 +21,13 @@ export const passwordChangeSuccess = () => {
   };
 };
 
+export const registerSuccess = (loggedInUser) => {
+  return {
+    type: actionTypes.REGISTER_SUCCESS,
+    loggedInUser: loggedInUser,
+  };
+};
+
 
 //Thunks
 export const login = (data) => {
@@ -31,7 +38,6 @@ export const login = (data) => {
         dispatch(logInSuccess(resp));
       })
       .catch((error) => {
-        //TODO dispatch a LOGIN_ERROR action here
         throw error;
       });
   };
@@ -56,6 +62,19 @@ export const changePassword = (data) => {
       .changePassword(data)
       .then(() => {
         dispatch(passwordChangeSuccess());
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
+export const register = (data) => {
+  return (dispatch) => {
+    return authServices
+      .userRegister(data)
+      .then((resp) => {
+        dispatch(registerSuccess(resp));
       })
       .catch((error) => {
         throw error;

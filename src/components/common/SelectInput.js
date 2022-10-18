@@ -9,9 +9,11 @@ const SelectInput = ({
   value,
   error,
   options,
+  extraClasses
 }) => {
+  const cssClasses = `form-group ${extraClasses}`
   return (
-    <div className="form-group mb-3">
+    <div className={cssClasses}>
       <label htmlFor={name}>{label}</label>
       <div className="field">
         {/* Note, value is set here rather than on the option - docs: https://facebook.github.io/react/docs/forms.html */}

@@ -13,6 +13,7 @@ import ChangePasswordPage from "./authentication/ChangePasswordPage";
 import ResetIntermediatePage from "./authentication/ResetIntermediatePage";
 import ResetPasswordPage from "./authentication/ResetPasswordPage";
 import ResetPwCompletePage from "./authentication/ResetPwCompletePage";
+import RegisterPage from "./authentication/RegisterPage";
 
 const App = () => (
   <div className="container-fluid me-auto" style={{ width: "100%" }}>
@@ -23,6 +24,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<FlightsPage />} />
         <Route path="/auth/login" element={<SignInPage />} />
+        <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/auth/change-pw" element={<ChangePasswordPage />} />
         <Route path="/auth/initiate-pw-reset" element={<ResetPasswordPage />} />
         <Route path="/auth/reset-intermediate" element={<ResetIntermediatePage />} />

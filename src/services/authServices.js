@@ -54,3 +54,12 @@ export const passwordResetComplete = (data) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const userRegister = (data) => {
+  return fetch(`${baseUrl}register/`, {
+    body: data,
+    method: "POST",
+  })
+    .then(handleResponse)
+    .catch(handleError);
+};

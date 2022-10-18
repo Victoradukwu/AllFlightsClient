@@ -26,7 +26,7 @@ const SignInForm = ({onChange, onSubmit, user}) => {
       </small>
       <br />
       <small>
-        Don&apos;t have an account? <a href="./register.html">Register</a> to
+        Don&apos;t have an account? <a href="/auth/register">Register</a> to
         continue.
       </small>
       <div>

@@ -8,7 +8,11 @@ const authReducer = (state = initialState.auth, action) => {
         ...state,
         user: action.loggedInUser
       };
-    case actionTypes.LOGOUT_SUCCESS:
+    case actionTypes.REGISTER_SUCCESS:
+      return {
+        ...state,
+        user: action.loggedInUser
+      };case actionTypes.LOGOUT_SUCCESS:
       return {
         ...state,
         user: null

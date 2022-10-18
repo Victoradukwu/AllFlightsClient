@@ -67,7 +67,7 @@ const NavBar = ({auth, logout}) => {
             {!auth.user ?
               <>
                 <Nav.Link href="/auth/login">Sign in</Nav.Link>
-                <Nav.Link href="#link">Register</Nav.Link>
+                <Nav.Link href="/auth/register">Register</Nav.Link>
               </>
               :
               <NavDropdown title={userName()} id="user-dropdown">
