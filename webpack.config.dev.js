@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const fs = require("fs");
 
 process.env.NODE_ENV = "development";
 
@@ -18,7 +19,10 @@ module.exports = {
     client: { overlay: true, logging: "info" },
     historyApiFallback: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-    https: false,
+    https: {
+            key: fs.readFileSync(path.resolve(__dirname, '../../localhost+2-key.pem')),
+            cert: fs.readFileSync(path.resolve(__dirname, '../../localhost+2.pem')),
+        },
     allowedHosts: "all",
     devMiddleware: { stats: "minimal" },
   },

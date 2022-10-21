@@ -63,3 +63,15 @@ export const userRegister = (data) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const socialLogin = (data) => {
+  console.log('TTTTTTT', data)
+  const backend = data.backend
+  return fetch(`${baseUrl}social/${backend}/`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(data)
+  })
+    .then(handleResponse)
+    .catch(handleError);
+};

@@ -14,6 +14,7 @@ import ResetIntermediatePage from "./authentication/ResetIntermediatePage";
 import ResetPasswordPage from "./authentication/ResetPasswordPage";
 import ResetPwCompletePage from "./authentication/ResetPwCompletePage";
 import RegisterPage from "./authentication/RegisterPage";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => (
   <div className="container-fluid me-auto" style={{ width: "100%" }}>
@@ -21,6 +22,7 @@ const App = () => (
     <NavBar />
     <BrowserRouter>
       <ReactTooltip />
+      <GoogleOAuthProvider clientId="407320224677-cn4a2ssilqknl6kbvch0c1qh9pqhv9ov.apps.googleusercontent.com">
       <Routes>
         <Route path="/" element={<FlightsPage />} />
         <Route path="/auth/login" element={<SignInPage />} />
@@ -30,6 +32,7 @@ const App = () => (
         <Route path="/auth/reset-intermediate" element={<ResetIntermediatePage />} />
         <Route path="/auth/complete-pw-reset" element={<ResetPwCompletePage />} />
       </Routes>
+      </GoogleOAuthProvider>
     </BrowserRouter>
     <Footer />
     <ToastContainer autoClose={3000} />

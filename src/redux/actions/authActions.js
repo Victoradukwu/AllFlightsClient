@@ -81,3 +81,16 @@ export const register = (data) => {
       });
   };
 };
+
+export const socialLogin = (data) => {
+  return (dispatch) => {
+    return authServices
+      .socialLogin(data)
+      .then((resp) => {
+        dispatch(logInSuccess(resp));
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};

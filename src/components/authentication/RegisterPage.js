@@ -5,9 +5,13 @@ import PropTypes from "prop-types";
 import RegisterForm from "./RegisterForm";
 import { toast } from "react-toastify";
 import {useNavigate} from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFacebookF, faGoogle} from "@fortawesome/free-brands-svg-icons";
+import SocialButton from "../common/SocialButton";
+import {useGoogleLogin} from "@react-oauth/google";
 // import Loader from "rsuite/Loader";
 
-const RegisterPage = ({register, auth}) => {
+const RegisterPage = ({register, auth, socialLogin}) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({});
@@ -44,6 +48,33 @@ const RegisterPage = ({register, auth}) => {
     }));
   };
 
+  const handleGoogleLogin = (user) => {
+    const data = {backend: 'google-oauth2', accessToken: user.access_token};
+    socialLogin(data)
+      .then(() => {
+        toast.success("Successfully signed in");
+      })
+      .then(() => navigate('/'))
+};
+  const login = useGoogleLogin({
+  onSuccess: tokenResponse => handleGoogleLogin(tokenResponse),
+});
+
+
+  const handleFacebookLogin = (user) => {
+    const data = {backend: user.provider, accessToken: user.token.accessToken};
+    socialLogin(data)
+      .then(() => {
+        toast.success("Successfully signed in");
+      })
+      .then(() => navigate('/'))
+};
+
+const handleSocialLoginFailure = (err) => {
+  console.error(err);
+  toast.error(err);
+};
+
   return (
     <main>
       <div className="card shadow-lg mx-auto">
@@ -54,18 +85,21 @@ const RegisterPage = ({register, auth}) => {
           <RegisterForm onChange={handleChange} onSubmit={handleSubmit} user={user}/>
         </div>
         <hr />
-        <div style={{ margin: "8px" }}>
-          <button className="btn btn-social btn-facebook">
-            <span className="fa fa-facebook" aria-hidden="true"></span> Continue
-            with Facebook
+        <div style={{margin: "8px"}}>
+          <button className="btn btn-social btn-google" onClick={() => login()}>
+            <FontAwesomeIcon icon={faGoogle} style={{marginRight: "10px"}}/> Continue with Google
           </button>
         </div>
-        <div style={{ margin: "8px" }}>
-          <button className="btn btn-social btn-google">
-            <span className="fa fa-google" aria-hidden="true"></span> Continue
-            with Google
-          </button>
-        </div>
+        <SocialButton
+          btnClasses={"btn btn-social btn-facebook"}
+          provider="facebook"
+          onLoginSuccess={handleFacebookLogin}
+          onLoginFailure={handleSocialLoginFailure}
+          appId={"1314353179058237"}
+        >
+          <FontAwesomeIcon icon={faFacebookF} style={{marginRight: "10px"}}/>
+          Log in with Facebook
+        </SocialButton>
       </div>
     </main>
   );
@@ -73,7 +107,8 @@ const RegisterPage = ({register, auth}) => {
 
 RegisterPage.propTypes = {
   auth: PropTypes.object.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  socialLogin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -83,7 +118,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  register: authActions.register
+  register: authActions.register,
+  socialLogin: authActions.socialLogin
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
