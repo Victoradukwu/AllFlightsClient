@@ -6,7 +6,7 @@ const TextInput = ({ name, label, onChange, placeholder, value, extraClasses }) 
   return (
 
     <div className={cssClasses}>
-      <label>{label}:
+      <label>{label}:</label>
         <input
           className="form-control form-control-sm"
           formcontrolname={name}
@@ -17,7 +17,6 @@ const TextInput = ({ name, label, onChange, placeholder, value, extraClasses }) 
           value={value}
           onChange={onChange}
         />
-      </label>
     </div>
   );
 };

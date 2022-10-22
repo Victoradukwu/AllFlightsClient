@@ -11,6 +11,13 @@ export const listFlightsSuccess = (flights, pageCount, count) => {
   };
 };
 
+export const scheduleFlightSuccess = (flight) => {
+  return {
+    type: actionTypes.SCHEDULE_FLIGHT_SUCCESS,
+    flight: flight
+  };
+};
+
 export const pageCountUpdate = (pageCount) => {
   return {
     type: actionTypes.PAGE_COUNT_UPDATE,
@@ -34,10 +41,18 @@ export const listFlights = (page = 1) => {
   };
 };
 
-//
-// export const deleteCourse = (course) => {
-//   return (dispatch) => {
-//     dispatch(deleteCourseOptimistic(course));
-//     return courseApi.deleteCourse(course.id);
-//   };
-// };
+
+export const scheduleFlight = (flight) => {
+  return (dispatch) => {
+    return flightsServices
+      .scheduleFlight(flight)
+      .then((resp) => {
+        dispatch(
+          scheduleFlightSuccess(resp.results)
+        );
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};

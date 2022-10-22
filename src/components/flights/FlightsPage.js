@@ -13,7 +13,7 @@ const FlightsPage = ({ flight, listFlights }) => {
 
   const fetchNewFlightsPage = () => {
     listFlights(activePage)
-      .then(() => toast.success("Flights fetched"))
+      // .then(() => toast.success("Flights fetched"))
       .catch((error) => {
         toast.error("Loading flights failed" + error);
       });

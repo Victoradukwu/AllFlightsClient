@@ -8,7 +8,7 @@ const FlightsList = ({ flights, pageCount, count, onSelect, activePage }) => {
     <main>
       <div className="shadow main-outer-div container">
         <h2 style={{ display: "inline" }}>Available Flights</h2>
-        <button className="btn btn-solid float-end" type="button">
+        <button className="btn btn-solid float-end" type="button" style={{marginRight:'30px'}}>
           Filter flights
         </button>
         <div className="shadow">

@@ -7,11 +7,14 @@ export const listFlights = (page) => {
     .catch(handleError);
 };
 
-export const createFlight = (course) => {
-  return fetch(baseUrl, {
+export const scheduleFlight = (flight) => {
+  return fetch(`${baseUrl}`, {
     method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(course),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": `Token ${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify(flight),
   })
     .then(handleResponse)
     .catch(handleError);

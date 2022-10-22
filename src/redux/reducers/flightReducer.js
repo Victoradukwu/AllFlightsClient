@@ -11,6 +11,8 @@ const flightReducer = (state = initialState.flights, action) => {
         count: action.count,
         numberOfPages: action.numberOfPages
       };
+    case actionTypes.SCHEDULE_FLIGHT_SUCCESS:
+      return [...state.flights, action.flight]
     default:
       return state;
   }

@@ -50,6 +50,7 @@ label {
 }
 .card-holder {
   width: 410px;
+  background-color: #f2f2fA;
 }
 input[type="checkbox"] {
   margin-left: 5px !important;
