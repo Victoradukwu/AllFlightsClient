@@ -69,9 +69,6 @@ const NavBar = ({auth, logout}) => {
               </>
               :
               <NavDropdown title={userName()} id="user-dropdown">
-                <NavDropdown.Item style={adminOnlyVisibility()} href="schedule-flight">
-                  Schedule flight
-                </NavDropdown.Item>
                 <NavDropdown.Item style={adminOnlyVisibility()}>
                   Deactivate User
                 </NavDropdown.Item>

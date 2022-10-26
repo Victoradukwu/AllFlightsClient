@@ -1,14 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tooltip, Whisper, Pagination } from "rsuite";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {connect} from "react-redux";
 
-const FlightsList = ({ flights, pageCount, count, onSelect, activePage}) => {
+const FlightsList = ({ flights, pageCount, count, onSelect, activePage, auth}) => {
+  const navigate = useNavigate()
+
+  const adminOnlyVisibility = ()=>{
+    if (auth.user && auth.user.user.roles.includes('admin')){
+      return {display: 'inline', marginLeft:'300px'}
+    }else {return {display: 'none'}}
+  }
 
   return (
     <main>
       <div className="shadow main-outer-div container">
         <h2 style={{ display: "inline" }}>Available Flights</h2>
+        <button className="btn btn-solid" type="button" style={adminOnlyVisibility()} onClick={()=>navigate('/schedule-flight')}>
+          Schedule flight
+        </button>
         <button className="btn btn-solid float-end" type="button" style={{marginRight:'30px'}}>
           Filter flights
         </button>
@@ -108,6 +119,13 @@ FlightsList.propTypes = {
   pageCount: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default FlightsList;
+const mapStateToProps = (state)=>{
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps)(FlightsList);
