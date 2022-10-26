@@ -5,9 +5,11 @@ import PropTypes from "prop-types";
 import FlightsList from "./FlightsList";
 import { toast } from "react-toastify";
 import Loader from "rsuite/Loader";
+import {useNavigate} from "react-router-dom";
 
 const FlightsPage = ({ flight, listFlights }) => {
 
+  const navigate = useNavigate();
   const [activePage, setActivePage] = useState(1);
   const handlePageChange = (event) => setActivePage(Number(event))
 
@@ -18,6 +20,11 @@ const FlightsPage = ({ flight, listFlights }) => {
         toast.error("Loading flights failed" + error);
       });
   };
+
+  const editFlight = (event)=>{
+    const id = event.target.parentElement.key
+    navigate(`/flights/${id}`)
+  }
 
   useEffect(fetchNewFlightsPage, [activePage]);
 
@@ -39,6 +46,7 @@ const FlightsPage = ({ flight, listFlights }) => {
           pageCount={flight.pageCount}
           activePage={activePage}
           onSelect={handlePageChange}
+          editFlight={editFlight}
         />
       )}
     </>

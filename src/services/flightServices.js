@@ -21,9 +21,9 @@ export const scheduleFlight = (flight) => {
 };
 
 export const updateFlight = (course) => {
-  return fetch(`${baseUrl}course.id/`, {
+  return fetch(`${baseUrl}${course.id}/`, {
     method: "PATCH",
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json", "Authorization": `Token ${localStorage.getItem('token')}` },
     body: JSON.stringify(course),
   })
     .then(handleResponse)

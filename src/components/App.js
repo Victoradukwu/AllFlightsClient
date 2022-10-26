@@ -16,6 +16,7 @@ import ResetPwCompletePage from "./authentication/ResetPwCompletePage";
 import RegisterPage from "./authentication/RegisterPage";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ScheduleFlight from "./flights/ScheduleFlight";
+import FlightEditPage from "./flights/FlightEditPage";
 
 const App = () => (
   <div className="container-fluid me-auto" style={{ width: "100%" }}>
@@ -27,6 +28,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<FlightsPage />} />
         <Route path="/schedule-flight" element={<ScheduleFlight />} />
+        <Route path="/flights/:id" element={<FlightEditPage />} />
         <Route path="/auth/login" element={<SignInPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/auth/change-pw" element={<ChangePasswordPage />} />

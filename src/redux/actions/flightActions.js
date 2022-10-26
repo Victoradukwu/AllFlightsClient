@@ -18,6 +18,13 @@ export const scheduleFlightSuccess = (flight) => {
   };
 };
 
+export const updateFlightSuccess = (flight) => {
+  return {
+    type: actionTypes.UPDATE_FLIGHT_SUCCESS,
+    flight: flight
+  };
+};
+
 export const pageCountUpdate = (pageCount) => {
   return {
     type: actionTypes.PAGE_COUNT_UPDATE,
@@ -49,6 +56,21 @@ export const scheduleFlight = (flight) => {
       .then((resp) => {
         dispatch(
           scheduleFlightSuccess(resp.results)
+        );
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
+export const updateFlight = (flight) => {
+  return (dispatch) => {
+    return flightsServices
+      .updateFlight(flight)
+      .then((resp) => {
+        dispatch(
+          updateFlightSuccess(resp)
         );
       })
       .catch((error) => {

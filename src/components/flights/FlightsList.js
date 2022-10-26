@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tooltip, Whisper, Pagination } from "rsuite";
+import {Link} from "react-router-dom";
 
-const FlightsList = ({ flights, pageCount, count, onSelect, activePage }) => {
+const FlightsList = ({ flights, pageCount, count, onSelect, activePage}) => {
 
   return (
     <main>
@@ -29,7 +30,7 @@ const FlightsList = ({ flights, pageCount, count, onSelect, activePage }) => {
               {flights.map((flight) => {
                 return (
                   <tr key={flight.id}>
-                    <td>{flight.carrierName}</td>
+                    <td><Link to={`/flights/${flight.id}`}>{flight.carrierName}</Link></td>
                     <Whisper
                       trigger="hover"
                       placement="topStart"
