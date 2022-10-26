@@ -6,34 +6,30 @@ const SelectInput = ({
   label,
   onChange,
   defaultOption,
-  value,
-  error,
+  identifier,
+  display,
   options,
   extraClasses
 }) => {
-  const cssClasses = `form-group ${extraClasses}`
   return (
-    <div className={cssClasses}>
-      <label htmlFor={name}>{label}</label>
-      <div className="field">
-        {/* Note, value is set here rather than on the option - docs: https://facebook.github.io/react/docs/forms.html */}
+    <div className={extraClasses}>
+      <label htmlFor={name}>{label}:</label>
         <select
           name={name}
-          value={value}
+          identifier={identifier}
+          display={display}
           onChange={onChange}
-          className="form-control"
+          className="form-control form-control-sm"
         >
           <option value="">{defaultOption}</option>
           {options.map((option) => {
             return (
-              <option key={option.value} value={option.value}>
-                {option.text}
+              <option key={option[identifier]} value={option[identifier]}>
+                {option[display]}
               </option>
             );
           })}
         </select>
-        {error && <div className="alert alert-danger">{error}</div>}
-      </div>
     </div>
   );
 };
@@ -43,9 +39,10 @@ SelectInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   defaultOption: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  error: PropTypes.string,
+  identifier: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   options: PropTypes.arrayOf(PropTypes.object),
+  display: PropTypes.string.isRequired,
+  extraClasses: PropTypes.string
 };
 
 export default SelectInput;

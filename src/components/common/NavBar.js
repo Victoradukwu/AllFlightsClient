@@ -6,10 +6,8 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import * as authActions from "../../redux/actions/authActions";
 import {toast} from "react-toastify";
-// import {useNavigate} from "react-router-dom";
 
 const NavBar = ({auth, logout}) => {
-  // const navigate = useNavigate();
   const userName = ()=>{
     if (auth.user){return auth.user.user.firstName+' '+ auth.user.user.lastName;}
     else {return null;}
