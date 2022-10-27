@@ -25,6 +25,13 @@ export const updateFlightSuccess = (flight) => {
   };
 };
 
+export const deleteFlightSuccess = (id) => {
+  return {
+    type: actionTypes.DELETE_FLIGHT_SUCCESS,
+    flight_id: id
+  };
+};
+
 export const pageCountUpdate = (pageCount) => {
   return {
     type: actionTypes.PAGE_COUNT_UPDATE,
@@ -71,6 +78,21 @@ export const updateFlight = (flight) => {
       .then((resp) => {
         dispatch(
           updateFlightSuccess(resp)
+        );
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
+export const deleteFlight = (id) => {
+  return (dispatch) => {
+    return flightsServices
+      .deleteFlight(id)
+      .then(() => {
+        dispatch(
+          deleteFlightSuccess(id)
         );
       })
       .catch((error) => {

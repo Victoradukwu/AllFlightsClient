@@ -13,6 +13,11 @@ const flightReducer = (state = initialState.flights, action) => {
       };
     case actionTypes.SCHEDULE_FLIGHT_SUCCESS:
       return [...state.flights, action.flight]
+    case actionTypes.DELETE_FLIGHT_SUCCESS:
+      return {
+        ...state,
+        flights: state.flights.filter((flight) => flight.id === action.flight_id
+      )}
     case actionTypes.UPDATE_FLIGHT_SUCCESS:
       return {
         ...state,

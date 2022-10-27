@@ -8,8 +8,9 @@ import {useNavigate, useParams} from 'react-router-dom';
 import Loader from "rsuite/Loader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit} from '@fortawesome/free-solid-svg-icons'
+import {confirmAlert} from "react-confirm-alert";
 
-const FlightEditPage = ({updateFlight, flights, auth}) => {
+const FlightEditPage = ({updateFlight, flights, auth, deleteFlight}) => {
   const navigate = useNavigate();
   let { id } = useParams();
 
@@ -27,6 +28,33 @@ const FlightEditPage = ({updateFlight, flights, auth}) => {
   return fetch(`${process.env.API_URL}/carriers`)
     .then(resp=>resp.json());
 };
+
+  const deleteFlight_ = ()=>{
+    deleteFlight(id)
+      .then(() => {
+        toast.success(" Flight successfully cancelled");
+      })
+      .then(() => navigate('/'))
+      .catch((error) => {
+        toast.error("Delete failed. " + error);
+      });
+  }
+
+  const handleDelete = () => {
+    confirmAlert({
+      title: 'Confirm delete',
+      message: 'Are you sure to delete?.',
+      buttons: [
+        {
+          label: 'Yes, delete.',
+          onClick: () => deleteFlight_()
+        },
+        {
+          label: 'No, go back'
+        }
+      ]
+    });
+  };
 
   const adminOnlyVisibility = ()=>{
     if (auth.user && auth.user.user.roles.includes('admin')){
@@ -99,6 +127,7 @@ const FlightEditPage = ({updateFlight, flights, auth}) => {
             airports={airports}
             carriers={carriers}
             flight={flight}
+            handleDelete={handleDelete}
           />
         </div>
       </div>
@@ -108,13 +137,15 @@ const FlightEditPage = ({updateFlight, flights, auth}) => {
 
 FlightEditPage.propTypes = {
   updateFlight: PropTypes.func.isRequired,
+  deleteFlight: PropTypes.func.isRequired,
   flight: PropTypes.object,
   flights: PropTypes.array.isRequired,
   auth: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = {
-  updateFlight: flightActions.updateFlight
+  updateFlight: flightActions.updateFlight,
+  deleteFlight: flightActions.deleteFlight
 };
 
 const mapStateToProps = (state) => {

@@ -4,7 +4,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
 
-const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
+const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight, handleDelete}) => {
   return (
     <form onSubmit={onSubmit}>
       <fieldset disabled id="form-fieldset">
@@ -50,6 +50,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                     // placeholder='YYYY-MM-DD'
                     extraClasses='col-md-6 form-group'
                     value={flight.flightNumber}
+                    defaultOption='FLT8'
                   />
                 </div>
                  <div className="row mt-2">
@@ -60,6 +61,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                       placeholder='YYYY-MM-DD'
                       extraClasses='col-md-6 form-group'
                       value={flight.departureDate}
+                      defaultOption='YYYY-MM-DD'
                     />
                    <TextInput
                       onChange={onChange}
@@ -68,6 +70,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                       placeholder='HH:mm'
                       extraClasses='col-md-6 form-group'
                       value={flight.departureTime}
+                      defaultOption='00:00'
                     />
                  </div>
                 <div className="row mt-2">
@@ -77,6 +80,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                     label='Duration'
                     extraClasses='col-md-6 form-group'
                     value={flight.duration}
+                    defaultOption='00:00'
                   />
                   <SelectInput
                     onChange={onChange}
@@ -96,6 +100,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                     label='Economy fare'
                     extraClasses='col-md-6 form-group'
                     value={flight.classes.find(cls=>cls.className==='Economy').fare}
+                    defaultOption='20'
                   />
                   <TextInput
                     onChange={onChange}
@@ -103,6 +108,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                     label='Premium fare'
                     extraClasses='col-md-6 form-group'
                     value={flight.classes.find(cls=>cls.className==='Premium').fare}
+                    defaultOption='20'
                   />
                 </div>
                 <div className="row">
@@ -112,6 +118,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                     label='Business fare'
                     extraClasses='col-md-6 form-group'
                     value={flight.classes.find(cls=>cls.className==='Business').fare}
+                    defaultOption='20'
                   />
                 </div>
           <hr/>
@@ -120,7 +127,7 @@ const FlightEditForm = ({onChange, onSubmit, airports, carriers, flight}) => {
                            <button className="btn float-left" style={{"display": "none"}} type="submit" id="submit">Submit</button>
                        </div>
                        <div className="form-group col-md-6">
-                           <button className="btn float-end" style={{"display": "none"}}  type="button" id="delete">Delete</button>
+                           <button className="btn float-end" style={{"display": "none"}}  type="button" id="delete" onClick={handleDelete}>Delete</button>
                        </div>
                    </div>
                   </fieldset>
@@ -133,7 +140,8 @@ FlightEditForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   airports: PropTypes.array.isRequired,
   carriers: PropTypes.array.isRequired,
-  flight: PropTypes.object.isRequired
+  flight: PropTypes.object.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 export default FlightEditForm;

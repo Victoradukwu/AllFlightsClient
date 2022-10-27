@@ -23,19 +23,23 @@ export const scheduleFlight = (flight) => {
 export const updateFlight = (course) => {
   return fetch(`${baseUrl}${course.id}/`, {
     method: "PATCH",
-    headers: { "content-type": "application/json", "Authorization": `Token ${localStorage.getItem('token')}` },
+    headers: {
+      "content-type": "application/json",
+      "Authorization": `Token ${localStorage.getItem('token')}`
+    },
     body: JSON.stringify(course),
   })
     .then(handleResponse)
     .catch(handleError);
 };
 
-export const deleteFlight = (course) => {
-  return fetch(`${baseUrl}course.id/`, {
+export const deleteFlight = (id) => {
+  return fetch(`${baseUrl}${id}/`, {
     method: "DELETE",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(course),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": `Token ${localStorage.getItem('token')}`
+    }
   })
-    .then(handleResponse)
     .catch(handleError);
 };
