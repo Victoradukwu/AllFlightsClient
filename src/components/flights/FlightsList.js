@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { Tooltip, Whisper, Pagination } from "rsuite";
 import {Link, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
+import FlightFilterModal from "./FlightFilterModal";
 
-const FlightsList = ({ flights, pageCount, count, onSelect, activePage, auth}) => {
+const FlightsList = ({ flights, pageCount, count, onSelect, activePage, auth, onChange, onFilter}) => {
   const navigate = useNavigate()
 
   const adminOnlyVisibility = ()=>{
@@ -20,9 +21,7 @@ const FlightsList = ({ flights, pageCount, count, onSelect, activePage, auth}) =
         <button className="btn btn-solid" type="button" style={adminOnlyVisibility()} onClick={()=>navigate('/schedule-flight')}>
           Schedule flight
         </button>
-        <button className="btn btn-solid float-end" type="button" style={{marginRight:'30px'}}>
-          Filter flights
-        </button>
+        <FlightFilterModal id='myModal' className="float-end" style={{marginRight:'30px'}} onChange={onChange} onFilter={onFilter}/>
         <div className="shadow">
           <table className="table table-hover">
             <thead>
@@ -119,7 +118,9 @@ FlightsList.propTypes = {
   pageCount: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state)=>{

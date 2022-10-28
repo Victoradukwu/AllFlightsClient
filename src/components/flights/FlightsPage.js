@@ -7,14 +7,29 @@ import { toast } from "react-toastify";
 import Loader from "rsuite/Loader";
 import {useNavigate} from "react-router-dom";
 
-const FlightsPage = ({ flight, listFlights }) => {
+const FlightsPage = ({ flight, listFlights}) => {
 
   const navigate = useNavigate();
-  const [activePage, setActivePage] = useState(1);
-  const handlePageChange = (event) => setActivePage(Number(event))
+  const [query, setQuery] = useState({'page': 1});
+
+  const handlePageChange = (event) => setQuery(prevQuery => ({...prevQuery, 'page': Number(event)}))
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setQuery((prevQuery) => ({
+      ...prevQuery,
+      [name]: value
+    }));
+  };
 
   const fetchNewFlightsPage = () => {
-    listFlights(activePage)
+    let query1 = ''
+    for (const [key, value] of Object.entries(query)) {
+      query1 += `&${key}=${value}`;
+}
+    let query2 = query1.replace('&', '?')
+    listFlights(query2)
       // .then(() => toast.success("Flights fetched"))
       .catch((error) => {
         toast.error("Loading flights failed" + error);
@@ -26,8 +41,12 @@ const FlightsPage = ({ flight, listFlights }) => {
     navigate(`/flights/${id}`)
   }
 
-  useEffect(fetchNewFlightsPage, [activePage]);
+  useEffect(fetchNewFlightsPage, [query.page]);
 
+  const handleFilter = (event) =>{
+    event.preventDefault();
+    fetchNewFlightsPage();
+  }
   return (
     <>
       {!("flights" in flight) ? (
@@ -44,9 +63,11 @@ const FlightsPage = ({ flight, listFlights }) => {
           flights={flight.flights}
           count={flight.count}
           pageCount={flight.pageCount}
-          activePage={activePage}
+          activePage={query.page}
           onSelect={handlePageChange}
           editFlight={editFlight}
+          onChange={handleChange}
+          onFilter={handleFilter}
         />
       )}
     </>
@@ -55,7 +76,7 @@ const FlightsPage = ({ flight, listFlights }) => {
 
 FlightsPage.propTypes = {
   flight: PropTypes.object.isRequired,
-  listFlights: PropTypes.func.isRequired,
+  listFlights: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {

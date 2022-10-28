@@ -1,8 +1,8 @@
 import { handleResponse, handleError } from "./apiUtils";
 const baseUrl = `${process.env.API_URL}/flights/`;
 
-export const listFlights = (page) => {
-  return fetch(`${baseUrl}?page=${page}`)
+export const listFlights = (query) => {
+  return fetch(`${baseUrl}${query}`)
     .then(handleResponse)
     .catch(handleError);
 };

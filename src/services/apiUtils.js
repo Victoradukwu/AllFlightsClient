@@ -1,5 +1,4 @@
 export const handleResponse = async (response) =>{
-  console.log('KKKKKK', response)
   if (response.ok) {return response.json();}
 
   const  err_msg = await response.json();
