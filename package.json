@@ -5,25 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --config webpack.config.dev.js --port 3000",
-    "test": "jest --watch",
     "clean:build": "rimraf ./build && mkdir build",
-    "test:ci": "jest",
-    "prebuild": "run-p clean:build test:ci",
+    "prebuild": "run-p clean:build",
     "build": "webpack --config webpack.config.prod.js",
     "serve:build": "http-server ./build",
     "postbuild": "run-p start:api serve:build"
   },
   "author": "vicads01@gmail.com",
-  "jest": {
-    "setupFiles": [
-      "./tools/testSetup.js"
-    ],
-    "testEnvironment": "jsdom",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/utils/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/src/utils/styleMock.js"
-    }
-  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
