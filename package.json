@@ -9,7 +9,7 @@
     "prebuild": "run-p clean:build",
     "build": "webpack --config webpack.config.prod.js",
     "serve:build": "http-server ./build",
-    "postbuild": "run-p start:api serve:build"
+    "postbuild": "serve:build"
   },
   "author": "vicads01@gmail.com",
   "dependencies": {
