@@ -8,7 +8,8 @@
     "start": "webpack serve --config webpack.config.prod.js",
     "clean:build": "rimraf ./build && mkdir build",
     "prebuild": "run-p clean:build",
-    "build": "webpack --config webpack.config.prod.js"
+    "build": "webpack --config webpack.config.prod.js",
+    "postbuild": "http-server ./build"
   },
   "author": "vicads01@gmail.com",
   "dependencies": {
