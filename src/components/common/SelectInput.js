@@ -13,7 +13,7 @@ const SelectInput = ({
 }) => {
   return (
     <div className={extraClasses}>
-      <label htmlFor={name}>{label}:</label>
+      {label?<label htmlFor={name}>{label}:</label>:null}
         <select
           name={name}
           identifier={identifier}

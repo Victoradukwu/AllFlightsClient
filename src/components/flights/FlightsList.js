@@ -82,7 +82,7 @@ const FlightsList = ({ flights, pageCount, count, onSelect, activePage, auth, on
                     </td>
                     <td>
                       <a href="#">
-                        <button className="btn">Buy Ticket</button>
+                        <button className="btn" onClick={()=> navigate(`/buy-ticket/${flight.id}`)}>Buy Ticket</button>
                       </a>
                     </td>
                   </tr>

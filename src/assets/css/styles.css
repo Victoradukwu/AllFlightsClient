@@ -22,13 +22,18 @@ span.error {
   font-size: 80%;
   color: #dc3545;
 }
-label,
-.form-control {
+label, .form-control {
   font-size: 15px;
   width: 100%;
 }
+
+span {
+  font-size: 18px;
+}
+
 label {
   margin-bottom: 0 !important;
+  text-align: left;
 }
 .card {
   width: 400px;
@@ -110,4 +115,61 @@ input[type="checkbox"] {
   .card {
     width: 70%;
   }
+}
+.Tabs {
+  height: auto;
+  min-height: 400px;
+  padding: 2rem 1rem;
+  color: #000000;
+  font-size: 18px;
+}
+
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-tabs__tab-list {
+  width: 60%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /*border-radius: 2rem;*/
+  padding-left: 0px;
+}
+
+.react-tabs__tab {
+  width: 50%;
+  padding: 10px;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  margin-bottom: 0;
+}
+
+.react-tabs__tab--selected {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.react-tabs__tab--disabled {
+  color: GrayText;
+  cursor: default;
+}
+
+.react-tabs__tab:hover {
+  background: rgba(102, 0, 51, 0.15);
+}
+
+.react-tabs__tab-panel {
+  display: none;
+}
+
+.react-tabs__tab-panel--selected {
+  display: block;
+  font-size: 2rem;
+  text-align: center;
 }

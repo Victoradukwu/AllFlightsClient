@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TextInput = ({ name, label, onChange, placeholder, value, extraClasses }) => {
+const TextInput = ({ name, label, onChange, placeholder, value, extraClasses, readonly }) => {
   const cssClasses = `form-group ${extraClasses}`
   return (
 
@@ -16,6 +16,7 @@ const TextInput = ({ name, label, onChange, placeholder, value, extraClasses }) 
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          readOnly={readonly}
         />
     </div>
   );
@@ -28,7 +29,8 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   error: PropTypes.string,
-  extraClasses: PropTypes.string
+  extraClasses: PropTypes.string,
+  readonly: PropTypes.bool
 };
 
 export default TextInput;

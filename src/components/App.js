@@ -17,6 +17,8 @@ import RegisterPage from "./authentication/RegisterPage";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ScheduleFlight from "./flights/ScheduleFlight";
 import FlightEditPage from "./flights/FlightEditPage";
+import BookTicket from "./flights/BookTicket";
+import TicketList from "./flights/TicketList";
 
 const App = () => (
   <div className="container-fluid me-auto" style={{ width: "100%" }}>
@@ -27,6 +29,8 @@ const App = () => (
       <GoogleOAuthProvider clientId="407320224677-cn4a2ssilqknl6kbvch0c1qh9pqhv9ov.apps.googleusercontent.com">
       <Routes>
         <Route path="/" element={<FlightsPage />} />
+        <Route path="/buy-ticket/:id" element={<BookTicket />} />
+        <Route path="/own-tickets" element={<TicketList />} />
         <Route path="/schedule-flight" element={<ScheduleFlight />} />
         <Route path="/flights/:id" element={<FlightEditPage />} />
         <Route path="/auth/login" element={<SignInPage />} />

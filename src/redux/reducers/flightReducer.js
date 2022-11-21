@@ -24,6 +24,12 @@ const flightReducer = (state = initialState.flights, action) => {
         flights: state.flights.map((flight) =>
         flight.id === action.flight.id ? action.flight : flight
       )}
+    case actionTypes.BOOK_TICKET_SUCCESS:
+      return {
+        ...state,
+        own_tickets: action.tickets,
+        ticket_message: action.ticket_message
+      }
     default:
       return state;
   }

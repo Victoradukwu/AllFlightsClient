@@ -39,6 +39,14 @@ export const pageCountUpdate = (pageCount) => {
   };
 };
 
+export const bookTicketSuccess = (resp) => {
+  return {
+    type: actionTypes.BOOK_TICKET_SUCCESS,
+    tickets: resp.detail,
+    ticketMessage: resp.message
+  };
+};
+
 //Thunks
 export const listFlights = (page = 1) => {
   return (dispatch) => {
@@ -100,3 +108,19 @@ export const deleteFlight = (id) => {
       });
   };
 };
+
+export const bookTicket = (data) => {
+  return (dispatch) => {
+    return flightsServices
+      .bookTicket(data)
+      .then((resp) => {
+        dispatch(
+          bookTicketSuccess(resp)
+        );
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
